@@ -1,1 +1,24 @@
-<p>confirm works!</p>
+<div class="transact-form">
+        <mat-card class="bit-form">
+{{transaction | json}}
+
+
+<h2>Your order has been confirmed!</h2>
+<div  *ngIf = "tr">
+    <table>
+    <tbody>
+        <tr><td>Name:</td><td class="info">{{tr.name}}</td></tr>
+        <tr><td>Contact No.:</td><td class="info">+65-{{tr.contact}}</td></tr>
+        <tr><td>Gender:</td><td class="info">{{ tr.gender }}</td></tr>
+        <tr><td>Date of Birth:</td><td class="info">{{ tr.dob | date }}</td></tr>
+        <tr><td>Order Date:</td><td class="info">{{ tr.orderDate | date }}</td></tr>
+        <tr><td>Units {{(tr.orderType === 'Buy' ? 'Bought' : 'Sold')}}:</td><td class="info">{{ tr.unit }}</td></tr>
+        <tr *ngIf="tr.orderType ==='Buy'"><td>Bitcon Address:</td><td class="info">{{ tr.btcAddress }}</td></tr>
+        <tr><td>Rate:</td><td class="info">{{ tr.rate | number: '.2'}}</td></tr>
+        <tr><td>Total:</td><td class="info">{{ tr.total | number: '.2' }}</td></tr>
+   </tbody>
+    </table>
+</div>
+
+</mat-card>
+</div>

@@ -7,4 +7,6 @@ export interface Transaction {
     orderType: string;
     unit: number;
     btcAddress: string;
+    rate?: number;
+    total?: number;
 }

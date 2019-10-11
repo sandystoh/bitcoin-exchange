@@ -23,14 +23,14 @@
             </mat-radio-group>
             </div>
             <mat-form-field class="full-width">
-                    <input matInput [matDatepicker]="dob" [max]="startDate" placeholder="Date of Birth" formControlName="dob" >
+                    <input matInput readonly [matDatepicker]="dob" [max]="startDate" placeholder="Date of Birth" formControlName="dob" >
                     <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
                     <mat-datepicker #dob></mat-datepicker>
                     <mat-hint *ngIf="transactForm.touched && f.dob.errors?.required">Please input a Date of Birth</mat-hint>
                     <mat-error *ngIf="transactForm.touched && f.dob.errors">Age must be at least 21</mat-error>
             </mat-form-field>
             <mat-form-field class="full-width">
-                    <input matInput [matDatepicker]="orderDate" [min]="startDate" placeholder="Order Date" formControlName="orderDate" >
+                    <input matInput readonly [matDatepicker]="orderDate" [min]="startDate" placeholder="Order Date" formControlName="orderDate" >
                     <mat-datepicker-toggle matSuffix [for]="orderDate"></mat-datepicker-toggle>
                     <mat-datepicker #orderDate></mat-datepicker>
                     <mat-hint *ngIf="transactForm.touched && f.orderDate.errors?.required">Please input an Order Date</mat-hint>

@@ -2,7 +2,7 @@
 html, body { height: 100%; width: 100vw;}
 body { margin: 0; }  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
 body {
-    font-family: 'Muli', sans-serif;
+    font-family: 'Muli', sans-serif!important;
     background-color:#000;
     color: #fff;
 }

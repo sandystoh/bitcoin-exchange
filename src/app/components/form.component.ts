@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractC
 import { Transaction } from '../models/transact';
 import * as moment from 'moment';
 import { BitcoinService } from '../services/bitcoin.service';
+import { TransactService } from '../services/transact.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -24,9 +26,11 @@ export class FormComponent implements OnInit {
   };
   startDate: any;
   bitcoin = {ask: 0, bid: 0};
+  rate = 0;
   transactionAmount = 0;
 
-  constructor(private formBuilder: FormBuilder, private btcSvc: BitcoinService) {
+  constructor(private formBuilder: FormBuilder, private btcSvc: BitcoinService,
+              private transSvc: TransactService, private router: Router) {
     this.transactForm = this.createFormGroup();
     this.transactForm.get('orderDate').setValue(new Date());
     this.transactForm.get('orderType').setValue('Buy');
@@ -64,8 +68,8 @@ export class FormComponent implements OnInit {
 
   calculatePrice($event) {
     console.log($event.target.value);
-    const rate = (this.transactForm.value.orderType === 'Buy') ? this.bitcoin.ask : this.bitcoin.bid;
-    this.transactionAmount = $event.target.value * rate;
+    this.rate = (this.transactForm.value.orderType === 'Buy') ? this.bitcoin.ask : this.bitcoin.bid;
+    this.transactionAmount = $event.target.value * this.rate;
   }
 
   cancel() {
@@ -74,7 +78,22 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     console.log('Submitted', this.transactForm.value);
-    const age = moment().diff(this.transactForm.value.dob, 'years');
-    console.log('age', age);
+    const val = this.transactForm.value;
+    const save: Transaction = {
+      name: val.name,
+      contact: val.contact,
+      gender: val.gender,
+      dob: val.dob,
+      orderDate: val.orderDate,
+      orderType: val.orderType,
+      unit: val.unit,
+      btcAddress: (val.orderType === 'Buy') ? val.btcAddress : null,
+      rate: this.rate,
+      total: this.transactionAmount
+    };
+    console.log('Saved', save);
+    this.transSvc.saveCurrentTransaction(save);
+    console.log('in service from form', this.transSvc.getCurrentTransaction());
+    this.router.navigate(['/confirm']);
   }
 }
