@@ -1,0 +1,21 @@
+.fixed-bg {
+    background-image: url('../assets/images/bitcoin-background.jpg');
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.mat-toolbar {
+    background-color: #333;
+}
+  
+.home {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #fff;
+}
