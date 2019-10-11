@@ -23,6 +23,8 @@ export class FormComponent implements OnInit {
     btcAddress: ''
   };
   startDate: any;
+  bitcoin = {ask: 0, bid: 0};
+  transactionAmount = 0;
 
   constructor(private formBuilder: FormBuilder, private btcSvc: BitcoinService) {
     this.transactForm = this.createFormGroup();
@@ -30,7 +32,7 @@ export class FormComponent implements OnInit {
     this.transactForm.get('orderType').setValue('Buy');
     this.startDate = moment();
 
-    this.btcSvc.getPrice().then((result) => { console.log(result); });
+    this.btcSvc.getPrice().then((result) => { console.log(result); this.bitcoin = result; });
   }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class FormComponent implements OnInit {
       dob: new FormControl('', [Validators.required, this.ageValidator(21)]),
       orderDate: new FormControl(''),
       orderType: new FormControl(''),
+      unit: new FormControl(''),
       btcAddress: new FormControl(''),
     });
   }
@@ -57,6 +60,12 @@ export class FormComponent implements OnInit {
       console.log('age', age);
       return age < min ? {ageValidation: {value: control.value}} : null;
     };
+  }
+
+  calculatePrice($event) {
+    console.log($event.target.value);
+    const rate = (this.transactForm.value.orderType === 'Buy') ? this.bitcoin.ask : this.bitcoin.bid;
+    this.transactionAmount = $event.target.value * rate;
   }
 
   cancel() {

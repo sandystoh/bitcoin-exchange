@@ -40,13 +40,42 @@
                 <mat-button-toggle value="Sell" class="submit-button" aria-label="Sell">Sell</mat-button-toggle>
             </mat-button-toggle-group>
             </div>
+            <div fxLayout="row">
+            <mat-form-field appearance="fill" class="first-half">
+                    <input type="number" matInput placeholder="Units to Transact" (keyup)="calculatePrice($event)" formControlName="unit"> 
+                    <span matPrefix>BTC&nbsp;</span>
+                    <mat-hint *ngIf="transactForm.touched && f.unit.errors?.required">Please input number of units of Bitcoin</mat-hint>       
+            </mat-form-field>
+            <div *ngIf="transactForm.value.orderType === 'Buy'">
+                <mat-form-field appearance="fill" class="second-half">
+                        <mat-label>Buying Rate</mat-label>
+                        <input type="number" matInput disabled=true value="{{bitcoin.ask}}"> 
+                        <span matPrefix>SGD&nbsp;</span>
+                </mat-form-field>
+            </div>
+            <div *ngIf="transactForm.value.orderType === 'Sell'">
+                <mat-form-field appearance="fill" class="second-half">
+                        <mat-label>Selling Rate</mat-label>
+                        <input type="number" matInput disabled=true value="{{bitcoin.bid}}"> 
+                        <span matPrefix>SGD&nbsp;</span>
+                </mat-form-field>
+                </div>
+            </div>
+            <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Total Amount</mat-label>
+                    <input matInput disabled=true value="{{ transactionAmount | number: '.2'}}"> 
+                    <span matPrefix>SGD&nbsp;</span>
+            </mat-form-field>
+
+
+            <div class="center" *ngIf="transactForm.value.orderType === 'Sell'">
+                    <img src = "../../assets/images/qrcode.png" width="150px">
+            </div>
+
             <div  class="full-width" fxLayout="row" fxLayoutAlign="space-around">
                 <button mat-raised-button class="submit-button" color="warn" (click)="cancel()">Cancel</button>
                 <button mat-raised-button class="submit-button" color="accent" button type="submit" [disabled]="transactForm.invalid">Make Transaction</button>
             </div>
-
-
-            
             </div>
         </form>
     </mat-card>

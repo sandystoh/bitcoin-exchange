@@ -46,3 +46,11 @@
     width: 100%;
     text-align: center;
 }
+
+.first-half{
+    width: 70vw;
+}
+
+.second-half{
+    width: 30vw;
+}
