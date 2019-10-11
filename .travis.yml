@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - node
+dist: bionic
+sudo: required
+branches:
+  only:
+   - master
+notifications:
+  slack: sandystoh:uErmkugqixVHBjTGPjLfAnSS
+before_script:
+  - npm install -g @angular/cli
+script:
+  - ng lint
+  - ng build --prod --base-href=/bitcoin-exchange/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/bitcoin-exchange
+  on:
+    branch: master
