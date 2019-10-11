@@ -47,7 +47,8 @@
             <mat-form-field appearance="fill" class="first-half">
                     <input type="number" min="0" oninput="this.value = Math.abs(this.value)" matInput placeholder="Units to Transact" (keyup)="calculatePrice($event)" formControlName="unit"> 
                     <span matPrefix>BTC&nbsp;</span>
-                    <mat-hint *ngIf="transactForm.touched && f.unit.errors?.required">Please input number of units of Bitcoin</mat-hint>       
+                    <mat-hint *ngIf="transactForm.touched && f.unit.errors?.required">Please input number of units of Bitcoin</mat-hint>
+                    <mat-error *ngIf="transactForm.touched && f.unit.errors?.pattern">Please input a valid number</mat-error>     
             </mat-form-field>
             <div *ngIf="transactForm.value.orderType === 'Buy'">
                 <mat-form-field appearance="fill" class="second-half">

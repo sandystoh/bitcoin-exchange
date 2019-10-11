@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
       dob: new FormControl('', [Validators.required, this.ageValidator(21)]),
       orderDate: new FormControl('', [Validators.required]),
       orderType: new FormControl('', [Validators.required]),
-      unit: new FormControl('', [Validators.required]),
+      unit: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
       btcAddress: new FormControl('', [Validators.required]),
     });
   }
