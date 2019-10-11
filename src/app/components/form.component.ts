@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Transaction } from '../models/transact';
 import * as moment from 'moment';
+import { BitcoinService } from '../services/bitcoin.service';
 
 @Component({
   selector: 'app-form',
@@ -23,10 +24,13 @@ export class FormComponent implements OnInit {
   };
   startDate: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private btcSvc: BitcoinService) {
     this.transactForm = this.createFormGroup();
     this.transactForm.get('orderDate').setValue(new Date());
+    this.transactForm.get('orderType').setValue('Buy');
     this.startDate = moment();
+
+    this.btcSvc.getPrice().then((result) => { console.log(result); });
   }
 
   ngOnInit() {

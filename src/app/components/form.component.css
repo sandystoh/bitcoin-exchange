@@ -37,3 +37,12 @@
     color: red;
     font-size: 0.9em;
 }
+
+.mat-button-toggle-checked{
+    background-color: rgb(255,193,7,0.8);
+}
+
+.center{
+    width: 100%;
+    text-align: center;
+}
