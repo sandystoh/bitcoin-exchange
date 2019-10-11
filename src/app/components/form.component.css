@@ -17,8 +17,8 @@
 
 .bit-form{
     width: 80vw;
-    margin: 10vw;
-    padding: 20px;
+    margin: 5vw;
+    padding: 10px;
 }
 
 .full-width {
@@ -48,9 +48,22 @@
 }
 
 .first-half{
-    width: 70vw;
+    width: 40vw;
 }
 
 .second-half{
-    width: 30vw;
+    width: 40vw;
 }
+
+@media only screen and (max-width: 500px) {
+    .first-half{
+        width: 80vw;
+    }
+    .second-half{
+        width: 80vw;
+    }
+  }
+
+input[disabled] {
+    color: #BA0000;
+ }

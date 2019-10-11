@@ -8,8 +8,10 @@
             </mat-form-field>
             <mat-form-field class="full-width">
                     <input matInput placeholder="Contact No." formControlName="contact">
+                    <span matPrefix>+65&nbsp;</span>
                     <mat-hint *ngIf="transactForm.touched && f.contact.errors?.required">Please input a Contact No.</mat-hint>
-            </mat-form-field>
+                    <mat-error *ngIf="transactForm.touched && f.contact.errors?.pattern">Please enter a valid Singapore Mobile Number</mat-error>
+                </mat-form-field>
             <div class="full-width" fxLayout="row" fxLayoutAlign="" fxLayoutGap="2vw">
             <label for="gender">Gender:</label>
             <mat-radio-group name="gender" id="gender" formControlName="gender">
@@ -40,24 +42,26 @@
                 <mat-button-toggle value="Sell" class="submit-button" aria-label="Sell">Sell</mat-button-toggle>
             </mat-button-toggle-group>
             </div>
-            <div fxLayout="row">
+            <div fxLayout="row column">
             <mat-form-field appearance="fill" class="first-half">
-                    <input type="number" matInput placeholder="Units to Transact" (keyup)="calculatePrice($event)" formControlName="unit"> 
+                    <input type="number" min="0" oninput="this.value = Math.abs(this.value)" matInput placeholder="Units to Transact" (keyup)="calculatePrice($event)" formControlName="unit"> 
                     <span matPrefix>BTC&nbsp;</span>
                     <mat-hint *ngIf="transactForm.touched && f.unit.errors?.required">Please input number of units of Bitcoin</mat-hint>       
             </mat-form-field>
             <div *ngIf="transactForm.value.orderType === 'Buy'">
                 <mat-form-field appearance="fill" class="second-half">
                         <mat-label>Buying Rate</mat-label>
-                        <input type="number" matInput disabled=true value="{{bitcoin.ask}}"> 
+                        <input matInput disabled=true value="{{bitcoin.ask | number: '.2'}}"> 
                         <span matPrefix>SGD&nbsp;</span>
+                        <span matSuffix>&nbsp;= 1 BTC</span>
                 </mat-form-field>
             </div>
             <div *ngIf="transactForm.value.orderType === 'Sell'">
                 <mat-form-field appearance="fill" class="second-half">
                         <mat-label>Selling Rate</mat-label>
-                        <input type="number" matInput disabled=true value="{{bitcoin.bid}}"> 
+                        <input matInput disabled=true value="{{bitcoin.bid | number: '.2'}}"> 
                         <span matPrefix>SGD&nbsp;</span>
+                        <span matSuffix>&nbsp;= 1 BTC</span>
                 </mat-form-field>
                 </div>
             </div>
@@ -66,6 +70,12 @@
                     <input matInput disabled=true value="{{ transactionAmount | number: '.2'}}"> 
                     <span matPrefix>SGD&nbsp;</span>
             </mat-form-field>
+            <div *ngIf="transactForm.value.orderType === 'Buy'">
+                    <mat-form-field appearance="fill" class="full-width">
+                    <input matInput placeholder="Bitcoin Address" formControlName="btcAddress">
+                    <mat-hint *ngIf="transactForm.touched && f.btcAddress.errors?.required">Please input a Bitcoin Address.</mat-hint>
+                        </mat-form-field>
+                </div>
 
 
             <div class="center" *ngIf="transactForm.value.orderType === 'Sell'">

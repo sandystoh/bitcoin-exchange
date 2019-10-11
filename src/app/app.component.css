@@ -1,6 +1,7 @@
 .fixed-bg {
     background-image: url('../assets/images/bitcoin-background.jpg');
     min-height: 100vh;
+    width: 100vw;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;

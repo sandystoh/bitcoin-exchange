@@ -43,14 +43,14 @@ export class FormComponent implements OnInit {
 
   createFormGroup() {
      return new FormGroup({
-      name: new FormControl(''), // ('', [Validators.required]),
-      contact: new FormControl(''),
-      gender: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      contact: new FormControl('', [Validators.required, Validators.pattern('^[8-9][0-9]{7}$')]),
+      gender: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required, this.ageValidator(21)]),
-      orderDate: new FormControl(''),
-      orderType: new FormControl(''),
-      unit: new FormControl(''),
-      btcAddress: new FormControl(''),
+      orderDate: new FormControl('', [Validators.required]),
+      orderType: new FormControl('', [Validators.required]),
+      unit: new FormControl('', [Validators.required]),
+      btcAddress: new FormControl('', [Validators.required]),
     });
   }
 
