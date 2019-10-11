@@ -69,7 +69,6 @@ export class FormComponent implements OnInit {
   }
 
   calculatePrice($event) {
-    console.log($event.target.value);
     this.rate = (this.transactForm.value.orderType === 'Buy') ? this.bitcoin.ask : this.bitcoin.bid;
     this.transactionAmount = $event.target.value * this.rate;
   }
@@ -86,7 +85,6 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Submitted', this.transactForm.value);
     const val = this.transactForm.value;
     const save: Transaction = {
       name: val.name,
@@ -100,9 +98,7 @@ export class FormComponent implements OnInit {
       rate: this.rate,
       total: this.transactionAmount
     };
-    console.log('Saved', save);
     this.transSvc.saveCurrentTransaction(save);
-    console.log('in service from form', this.transSvc.getCurrentTransaction());
     this.router.navigate(['/confirm']);
   }
 }

@@ -16,7 +16,6 @@ export class ConfirmComponent implements OnInit {
 
   ngOnInit() {
     this.tr = this.transSvc.getCurrentTransaction();
-    console.log(this.tr);
   }
 
 }
