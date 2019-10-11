@@ -39,7 +39,23 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  MAT_DATE_FORMATS
 } from '@angular/material';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
+
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD MMMM YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @NgModule({
   exports: [
     CdkTableModule,
@@ -81,6 +97,10 @@ import {
     MatTooltipModule,
     MatTreeModule,
     ScrollingModule,
-  ]
+    MatMomentDateModule
+  ],
+  providers: [MatDatepickerModule, { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}]
 })
+
 export class MaterialModule {}

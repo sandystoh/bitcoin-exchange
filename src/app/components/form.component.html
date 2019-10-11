@@ -1,7 +1,7 @@
 <div class="transact-form">
     <mat-card class="bit-form">
         <form [formGroup]="transactForm" (ngSubmit)="onSubmit()">
-            <div class="full-width" fxLayout="row column" fxLayoutAlign="space-around">
+            <div fxLayout="column" fxLayoutAlign="flex-start" fxLayoutGap="1vw">
             <mat-form-field class="full-width">
             <input matInput placeholder="Name" formControlName="name">
             <mat-hint *ngIf="transactForm.touched && f.name.errors?.required">Please input a Name</mat-hint>
@@ -10,10 +10,33 @@
                     <input matInput placeholder="Contact No." formControlName="contact">
                     <mat-hint *ngIf="transactForm.touched && f.contact.errors?.required">Please input a Contact No.</mat-hint>
             </mat-form-field>
+            <div class="full-width" fxLayout="row" fxLayoutAlign="" fxLayoutGap="2vw">
+            <label for="gender">Gender:</label>
+            <mat-radio-group name="gender" id="gender" formControlName="gender">
+                <div fxLayout="row" fxLayoutAlign="" fxLayoutGap="2vw">
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Male">Female</mat-radio-button>
+                </div>
+                <mat-hint *ngIf="transactForm.touched && f.gender.errors?.required">Please input a Gender</mat-hint>
+            </mat-radio-group>
             </div>
+            <mat-form-field class="full-width">
+                    <input matInput [matDatepicker]="dob" [max]="startDate" placeholder="Date of Birth" formControlName="dob" >
+                    <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                    <mat-datepicker #dob></mat-datepicker>
+                    <mat-hint *ngIf="transactForm.touched && f.dob.errors?.required">Please input a Date of Birth</mat-hint>
+                    <mat-error *ngIf="transactForm.touched && f.dob.errors">Age must be at least 21</mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                    <input matInput [matDatepicker]="orderDate" [min]="startDate" placeholder="Order Date" formControlName="orderDate" >
+                    <mat-datepicker-toggle matSuffix [for]="orderDate"></mat-datepicker-toggle>
+                    <mat-datepicker #orderDate></mat-datepicker>
+                    <mat-hint *ngIf="transactForm.touched && f.orderDate.errors?.required">Please input an Order Date</mat-hint>
+            </mat-form-field>
             <div  class="full-width" fxLayout="row" fxLayoutAlign="space-around">
                 <button mat-raised-button class="submit-button" color="warn" (click)="cancel()">Cancel</button>
                 <button mat-raised-button class="submit-button" color="accent" button type="submit" [disabled]="transactForm.invalid">Make Transaction</button>
+            </div>
             </div>
         </form>
     </mat-card>
