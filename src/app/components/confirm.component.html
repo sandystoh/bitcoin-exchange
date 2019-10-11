@@ -20,5 +20,19 @@
     </table>
 </div>
 
+<h2>To Complete your Transaction</h2>
+<div  *ngIf = "tr.orderType ==='Buy'">
+    <h4>Please wire the funds to the below PayNow Code.<br>
+        Once the SGD funds are received we will send the Bitcoin to your Wallet Address!</h4>
+   <div class="center" ><img src = "../../assets/images/qrcode.png" width="150px"></div>
+</div>
+<div  *ngIf = "tr.orderType ==='Sell'">
+        <h4>Please wire the Bitcoin to the below Wallet Address.<br>
+            Once the Bitcoin has been received received we will send the SGD funds to your PayNow!</h4>
+       <div class="center info" ><h4>bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5md</h4></div>
+    </div>
+<div class="center pad">
+        <button mat-raised-button color="accent" [routerLink]="['/']">Back Home</button>
+</div>
 </mat-card>
 </div>

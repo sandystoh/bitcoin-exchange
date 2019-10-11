@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { map, flatMap, toArray } from 'rxjs/operators';
 
-export const API = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/all'; 
+export const API = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/all';
 // ?crypto=BTC&fiat=SGD';
 
 @Injectable({

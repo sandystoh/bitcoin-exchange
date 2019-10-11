@@ -8,4 +8,17 @@
     letter-spacing: 0.1em;
     text-align: center;
     text-shadow: 2px 2px 5px #333;
+    font-family: 'Muli', sans-serif; 
+}
+
+.mat-raised-button {
+    font-family: 'Muli', sans-serif; 
+    border: 1px dashed #ffc107;
+    background: rgba(255,255,255,0.8);
+    font-weight: 700;
+}
+
+.mat-raised-button:hover {
+    background: rgba(255,193,7,0.8);
+    border: 1px dashed #ffc107;
 }

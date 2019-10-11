@@ -36,7 +36,9 @@ export class FormComponent implements OnInit {
     this.transactForm.get('orderType').setValue('Buy');
     this.startDate = moment();
 
-    this.btcSvc.getPrice().then((result) => { console.log(result); this.bitcoin = result; });
+    this.btcSvc.getPrice().then((result) => { console.log(result); this.bitcoin = result; }).catch(
+        () => { console.log('API Error'); this.bitcoin = {ask: 11500, bid: 11600}; }
+    );
   }
 
   ngOnInit() {
@@ -70,6 +72,13 @@ export class FormComponent implements OnInit {
     console.log($event.target.value);
     this.rate = (this.transactForm.value.orderType === 'Buy') ? this.bitcoin.ask : this.bitcoin.bid;
     this.transactionAmount = $event.target.value * this.rate;
+  }
+
+  changeType(e) {
+    if (this.transactForm.value.orderType === 'Sell') {
+      this.transactForm.get('btcAddress').setValidators(null);
+      this.transactForm.get('btcAddress').setErrors(null);
+    }
   }
 
   cancel() {

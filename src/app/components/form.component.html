@@ -1,6 +1,7 @@
 <div class="transact-form">
     <mat-card class="bit-form">
         <form [formGroup]="transactForm" (ngSubmit)="onSubmit()">
+            <h2 class="center">Bitcoin Transaction Request</h2>
             <div fxLayout="column" fxLayoutAlign="flex-start" fxLayoutGap="1vw">
             <mat-form-field class="full-width">
             <input matInput placeholder="Name" formControlName="name">
@@ -37,7 +38,7 @@
             </mat-form-field>
             <h2 class="center">Select Bitcoin Transaction Type: {{transactForm.value.orderType | uppercase }} <br></h2>
             <div class="center">
-            <mat-button-toggle-group formControlName="orderType"> 
+            <mat-button-toggle-group formControlName="orderType" (change)="changeType($event)"> 
                 <mat-button-toggle value="Buy" class="submit-button" aria-label="Buy">Buy</mat-button-toggle>
                 <mat-button-toggle value="Sell" class="submit-button" aria-label="Sell">Sell</mat-button-toggle>
             </mat-button-toggle-group>
@@ -79,6 +80,7 @@
 
 
             <div class="center" *ngIf="transactForm.value.orderType === 'Sell'">
+                    <h4>Please scan the below QR Code with PayNow.</h4>
                     <img src = "../../assets/images/qrcode.png" width="150px">
             </div>
 
